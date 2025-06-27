@@ -1,14 +1,11 @@
-// Efecto fade-in en scroll
-const fadeEls = document.querySelectorAll('.fade-in');
-const options = { threshold: 0.1 };
+// Puedes usar librerías como AOS.js, pero aquí una animación sencilla:
+const fadeIns = document.querySelectorAll('.fade-in');
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
+window.addEventListener('scroll', () => {
+  fadeIns.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      el.classList.add('visible');
     }
   });
-}, options);
-
-fadeEls.forEach(el => observer.observe(el));
-
+});
